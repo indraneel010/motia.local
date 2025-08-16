@@ -10,14 +10,15 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "outDir": "dist",
-    "rootDir": ".",
+    // FIXED: Point rootDir to 'src' for a clean output structure.
+    "rootDir": "src",
     "baseUrl": ".",
     "declaration": true,
     "types": ["node"]
   },
   "include": [
-    "src/**/*.ts",
-    "index.ts"
+    // FIXED: The compiler now only looks inside the 'src' directory.
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",
