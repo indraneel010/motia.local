@@ -24,17 +24,28 @@ export type RequestOptions = {
 
 export type CapturedEvent<TData = unknown> = Omit<Event<TData>, 'logger' | 'tracer'>
 
+// Mock function type for testing
+type MockFunction = (...args: any[]) => any
+
 export type MockFlowContext = {
-  logger: jest.Mocked<Logger>
-  emit: jest.Mock | FlowContext<unknown>['emit']
+  logger: MockLogger
+  emit: MockFunction | FlowContext<unknown>['emit']
   traceId: string
-  state: jest.Mocked<InternalStateManager>
+  state: MockStateManager
 }
 
 export interface MockLogger {
-  info: (message: string) => void
-  debug: (message: string) => void
-  warn: (message: string) => void
-  error: (message: string) => void
-  log: (message: string) => void
+  info: MockFunction
+  debug: MockFunction
+  warn: MockFunction
+  error: MockFunction
+  log: MockFunction
+}
+
+export interface MockStateManager {
+  get: MockFunction
+  set: MockFunction
+  delete: MockFunction
+  clear: MockFunction
+  getGroup: MockFunction
 }

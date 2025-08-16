@@ -1,0 +1,13 @@
+# Turbo ignore patterns
+.turbo/
+node_modules/
+.git/
+.next/cache/
+dist/
+*.log
+.env*
+.DS_Store
+Thumbs.db
+coverage/
+.nyc_output/
+*.tsbuildinfo

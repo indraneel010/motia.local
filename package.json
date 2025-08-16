@@ -3,17 +3,31 @@
   "private": true,
   "scripts": {
     "dev:docs": "pnpm -r --filter=docs start",
-    "dev": "pnpm run build && pnpm -r --filter=playground dev",
-    "dev:workbench": "pnpm run build && pnpm -r --filter=playground dev:workbench",
-    "build": "pnpm --filter=!docs run -r build",
-    "lint": "pnpm run -r --no-bail lint",
-    "lint:fix": "pnpm run -r --no-bail lint --fix",
-    "test": "pnpm -r run test",
+    "dev": "turbo build && pnpm -r --filter=playground dev",
+    "dev:workbench": "turbo build && pnpm -r --filter=playground dev:workbench",
+    "build": "turbo build --filter=!docs",
+    "build:legacy": "pnpm --filter=!docs run -r build",
+    "lint": "turbo lint",
+    "lint:legacy": "pnpm run -r --no-bail lint",
+    "lint:fix": "turbo lint -- --fix",
+    "test": "turbo test",
+    "test:legacy": "pnpm -r run test",
     "test:e2e": "pnpm --filter=@motiadev/e2e test",
     "test:e2e:ui": "pnpm --filter=@motiadev/e2e test:ui",
     "test:e2e:headed": "pnpm --filter=@motiadev/e2e test:headed",
     "e2e:install": "pnpm --filter=@motiadev/e2e install && pnpm --filter=@motiadev/e2e install:deps",
-    "clean": "rm -rf node_modules pnpm-lock.yaml dist .turbo .next"
+    "clean": "rm -rf node_modules pnpm-lock.yaml dist .turbo .next",
+    "turbo:cache:clear": "turbo daemon clean",
+    "turbo:cache:status": "turbo daemon status",
+    "turbo:build:dry": "turbo build --dry-run",
+    "turbo:build:verbose": "turbo build --verbosity=2",
+    "validate:turbo": "node scripts/validate-turbo.js",
+    "test:optimization": "node scripts/test-build-optimization.js",
+    "build:deps": "node scripts/build-dependencies.js",
+    "fix:test-module": "node scripts/fix-test-module.js",
+    "validate:complete": "node scripts/validate-complete-system.js",
+    "test:final": "node scripts/final-build-test.js",
+    "check:system": "node scripts/final-system-check.js"
   },
   "devDependencies": {
     "@types/node": "^22.15.18",
@@ -27,7 +41,8 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.1.0",
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "turbo": "^2.3.3"
   },
   "resolutions": {
     "autoprefixer": "^10.4.20",

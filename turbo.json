@@ -1,0 +1,62 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "!.next/cache/**"
+      ],
+      "cache": true,
+      "inputs": [
+        "src/**/*.ts",
+        "src/**/*.tsx", 
+        "src/**/*.js",
+        "src/**/*.jsx",
+        "src/**/*.py",
+        "src/**/*.rb",
+        "tsconfig*.json",
+        "package.json",
+        "scripts/**/*"
+      ]
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "cache": true,
+      "inputs": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.js", 
+        "src/**/*.jsx",
+        "__tests__/**/*",
+        "tests/**/*",
+        "integration-tests/**/*",
+        "*.config.js",
+        "*.config.ts",
+        "jest.config.*",
+        "package.json"
+      ]
+    },
+    "lint": {
+      "cache": true,
+      "inputs": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.js",
+        "src/**/*.jsx",
+        "*.config.js",
+        "*.config.ts", 
+        "eslint.config.*",
+        "package.json"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

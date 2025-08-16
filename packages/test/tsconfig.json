@@ -12,11 +12,18 @@
     "outDir": "dist",
     "rootDir": ".",
     "baseUrl": ".",
-    "declaration": true
+    "declaration": true,
+    "typeRoots": ["node_modules/@types", "../../node_modules/@types"],
+    "types": ["node", "jest"],
+    "paths": {
+      "@motiadev/*": ["../*"],
+      "motia": ["../../playground"]
+    }
   },
   "include": [
-    "src/*.ts"
-, "index.ts"  ],
+    "src/**/*.ts",
+    "index.ts"
+  ],
   "exclude": [
     "node_modules",
     "dist"

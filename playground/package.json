@@ -9,6 +9,7 @@
     "clean": "rm -rf .mermaid node_modules python_modules",
     "get-config": "motia get-config --output ./",
     "test:tsc-check": "tsc -p ./tests/tsconfig.test.json --noEmit",
+    "pretest": "cd .. && turbo build --filter=@motiadev/test --filter=@motiadev/core",
     "test": "PATH=python_modules/bin:$PATH jest",
     "test:silent": "PATH=python_modules/bin:$PATH jest --silent",
     "lint": "pnpm run lint:ts && pnpm run lint:tsx",
