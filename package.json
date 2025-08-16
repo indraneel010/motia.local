@@ -27,7 +27,8 @@
     "fix:test-module": "node scripts/fix-test-module.js",
     "validate:complete": "node scripts/validate-complete-system.js",
     "test:final": "node scripts/final-build-test.js",
-    "check:system": "node scripts/final-system-check.js"
+    "check:system": "node scripts/final-system-check.js",
+    "verify:build": "node scripts/verify-build.js"
   },
   "devDependencies": {
     "@types/node": "^22.15.18",

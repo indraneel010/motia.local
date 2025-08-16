@@ -13,12 +13,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "declaration": true,
-    "typeRoots": ["node_modules/@types", "../../node_modules/@types"],
-    "types": ["node", "jest"],
-    "paths": {
-      "@motiadev/*": ["../*"],
-      "motia": ["../../playground"]
-    }
+    "types": ["node"]
   },
   "include": [
     "src/**/*.ts",

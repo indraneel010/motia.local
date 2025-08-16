@@ -1,4 +1,4 @@
-import type { Event, EventManager, Handler, SubscribeConfig } from '@motiadev/core'
+import type { Event, EventManager, Handler, SubscribeConfig, UnsubscribeConfig } from '@motiadev/core'
 
 export interface TestEventManager extends EventManager {
   waitEvents(): Promise<void>
@@ -20,7 +20,7 @@ export const createEventManager = (): TestEventManager => {
     }
   }
 
-  const emit = async <TData>(event: Event<TData>): Promise<void> => {
+  const emit = async <TData>(event: Event<TData>, file?: string): Promise<void> => {
     const eventHandlers = handlers[event.topic] ?? []
     events.push(...eventHandlers.map((handler) => handler(event)))
   }
@@ -36,7 +36,7 @@ export const createEventManager = (): TestEventManager => {
   }
 
   // We don't need to unsubscribe in the test environment
-  const unsubscribe = (): void => {}
+  const unsubscribe = (config: UnsubscribeConfig): void => {}
 
   const eventManager: TestEventManager = {
     emit,

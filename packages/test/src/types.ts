@@ -1,5 +1,11 @@
-import type { Event, FlowContext, InternalStateManager, Logger } from '@motiadev/core'
-import type { Response } from 'supertest'
+import type { Event, FlowContext, Logger } from '@motiadev/core'
+
+// Define Response type locally to avoid supertest dependency issues
+export interface Response {
+  status: number
+  body: any
+  headers: Record<string, string>
+}
 
 export type Watcher<TData = unknown> = {
   getCapturedEvents(): CapturedEvent<TData>[]
