@@ -1,4 +1,3 @@
-import { Logger } from '@motiadev/core'
 import { MockFlowContext, MockLogger } from './types'
 
 // Simple mock function type for compatibility
