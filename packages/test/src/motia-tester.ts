@@ -44,11 +44,11 @@ export class MotiaTestFramework implements MotiaTester {
     }
   }
 
-  async get(path: string, options: RequestOptions): Promise<Response> {
+  async get(path: string, options?: RequestOptions): Promise<Response> {
     // Mock HTTP GET request
     return {
       status: 200,
-      body: { success: true, path, method: 'GET' },
+      body: { success: true, path, method: 'GET', query: options?.body },
       headers: { 'content-type': 'application/json' }
     }
   }

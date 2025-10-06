@@ -1,39 +1,73 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "**/.env.*local",
+    ".env",
+    "tsconfig.json",
+    "turbo.json"
+  ],
+  "globalEnv": [
+    "NODE_ENV",
+    "CI",
+    "VERCEL_ENV"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": [
         "dist/**",
         ".next/**",
-        "!.next/cache/**"
+        "!.next/cache/**",
+        "build/**",
+        "lib/**"
       ],
       "cache": true,
       "inputs": [
-        "src/**/*.ts",
-        "src/**/*.tsx", 
-        "src/**/*.js",
-        "src/**/*.jsx",
-        "src/**/*.py",
-        "src/**/*.rb",
+        "src/**/*.{ts,tsx,js,jsx}",
+        "src/**/*.{py,rb}",
         "tsconfig*.json",
         "package.json",
-        "scripts/**/*"
+        "*.config.{js,ts,mjs}",
+        "!src/**/*.test.{ts,tsx,js,jsx}",
+        "!src/**/*.spec.{ts,tsx,js,jsx}"
+      ],
+      "env": ["NODE_ENV", "NEXT_PUBLIC_*"],
+      "passThroughEnv": ["NODE_ENV", "CI"]
+    },
+    "build:fast": {
+      "dependsOn": ["^build:fast"],
+      "outputs": ["dist/**"],
+      "cache": true,
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "tsconfig.json",
+        "package.json"
       ]
     },
     "test": {
-      "dependsOn": ["build"],
+      "dependsOn": ["build:fast"],
       "cache": true,
       "inputs": [
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "src/**/*.js", 
-        "src/**/*.jsx",
+        "src/**/*.{ts,tsx,js,jsx}",
         "__tests__/**/*",
         "tests/**/*",
-        "integration-tests/**/*",
-        "*.config.js",
-        "*.config.ts",
+        "**/*.test.{ts,tsx,js,jsx}",
+        "**/*.spec.{ts,tsx,js,jsx}",
+        "jest.config.*",
+        "vitest.config.*",
+        "package.json"
+      ],
+      "outputs": [
+        "coverage/**",
+        "test-results/**"
+      ]
+    },
+    "test:unit": {
+      "cache": true,
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "**/*.test.{ts,tsx,js,jsx}",
+        "**/*.spec.{ts,tsx,js,jsx}",
         "jest.config.*",
         "package.json"
       ]
@@ -41,19 +75,34 @@
     "lint": {
       "cache": true,
       "inputs": [
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "src/**/*.js",
-        "src/**/*.jsx",
-        "*.config.js",
-        "*.config.ts", 
+        "src/**/*.{ts,tsx,js,jsx}",
+        "*.config.{js,ts,mjs}",
         "eslint.config.*",
+        ".eslintrc*",
+        "package.json"
+      ]
+    },
+    "lint:fix": {
+      "cache": false,
+      "inputs": [
+        "src/**/*.{ts,tsx,js,jsx}",
+        "eslint.config.*",
+        ".eslintrc*"
+      ]
+    },
+    "type-check": {
+      "dependsOn": ["^build:fast"],
+      "cache": true,
+      "inputs": [
+        "src/**/*.{ts,tsx}",
+        "tsconfig*.json",
         "package.json"
       ]
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "dependsOn": ["^build:fast"]
     },
     "clean": {
       "cache": false

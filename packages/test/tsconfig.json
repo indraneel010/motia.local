@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "CommonJS",
-    "moduleResolution": "Node",
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -12,13 +13,31 @@
     "outDir": "dist",
     "rootDir": "src",
     "baseUrl": ".",
-    "declaration": true
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "incremental": true,
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
+    "composite": true,
+    "isolatedModules": true,
+    "noEmitOnError": false,
+    "preserveWatchOutput": true,
+    "pretty": true
   },
+  "references": [
+    {
+      "path": "../core"
+    }
+  ],
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "index.ts"
   ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/__tests__/**"
   ]
 }

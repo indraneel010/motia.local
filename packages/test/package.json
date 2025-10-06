@@ -6,7 +6,12 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "lint": "eslint --config ../../eslint.config.js"
+    "build:fast": "tsc --incremental",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint --config ../../eslint.config.js",
+    "test": "jest",
+    "test:unit": "jest --testPathPattern=src",
+    "clean": "rm -rf dist .tsbuildinfo"
   },
   "dependencies": {
     "@motiadev/core": "workspace:*",

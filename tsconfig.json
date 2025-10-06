@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "incremental": true,
+    "composite": false
+  },
+  "references": [
+    { "path": "./packages/core" },
+    { "path": "./packages/test" },
+    { "path": "./packages/ui" },
+    { "path": "./packages/workbench" },
+    { "path": "./packages/stream-client" },
+    { "path": "./packages/stream-client-node" },
+    { "path": "./packages/stream-client-browser" },
+    { "path": "./packages/stream-client-react" }
+  ],
+  "files": [],
+  "include": [],
+  "exclude": [
+    "node_modules",
+    "**/dist",
+    "**/.next",
+    "**/build"
+  ]
+}
